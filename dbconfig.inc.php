@@ -6,18 +6,22 @@
  
 require_once('php-libs/Database.class.php');
  
-$dbHost = 'localhost:3306';
-$dbUser = 'user';
-$dbPassword = 'pw';
+$wowHost = 'localhost:3306';
+$wowUser = 'user';
+$wowPassword = 'pw';
+
+$webHost = 'localhost:3306';
+$webUser = 'user';
+$webPassword = 'pw';
 
 #world
 $dbName = 'world';
-$world = new Database($dbHost, $dbUser, $dbPassword, $dbName);
+$world = new Database($wowHost, $wowUser, $wowPassword, $dbName);
 
 #website
 $dbName = 'website';
-$website = new Database($dbHost, $dbUser, $dbPassword, $dbName);
+$website = new Database($webHost, $webUser, $webPassword, $dbName);
 
 #character
 $dbName = 'characters';
-$character = new Database($dbHost, $dbUser, $dbPassword, $dbName);
+$character = new Database($wowHost, $wowUser, $wowPassword, $dbName);
