@@ -1,0 +1,48 @@
+@media (min-width: 576px) {
+	#content {
+		margin: 36px;
+	}
+
+	#tab-content {
+		padding: 12px;
+	}
+
+	#costs {
+		position: fixed;
+		right: 32px;
+		bottom: 16px;
+		border: 1px solid #aaa;
+	}
+
+	[name=submitButton] {
+		margin-top: 8px;
+	}
+}
+@media (max-width: 575.98px) {
+	.nav-pills .nav-link {
+		border-radius: 0;
+	}
+	
+	.accordion .card {
+		border-right: none;
+		border-left: none;
+		border-radius: 0;
+	}
+	
+	#tab-content {
+		margin-top: 8px;
+	}
+	
+	[name=submitButton] {
+		margin: 8px auto;
+		display: block;
+		width: 90%;
+	}
+	
+	#costs {
+		box-shadow: none !important;
+	}
+}
+.input-group {
+	margin: 4px 0;
+}
