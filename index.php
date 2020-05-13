@@ -27,6 +27,39 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 		?>
 	</head>
 	<body>
+		<!-- Modals -->
+		<div class="modal fade" id="displayItemEntryModal" tabindex="-1" role="dialog" aria-labelledby="displayItemEntryModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="displayItemEntryModalLabel">Display Item Entry</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Lorem ipsum. Display Item Entry.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="characterIdModal" tabindex="-1" role="dialog" aria-labelledby="characterIdModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="displayItemEntryModalLabel">Character Id</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Lorem ipsum. Character Id.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modals end -->
+		
 		<div id="ajaxContainer"></div>
 		<div id="content">
 			<ul class="nav nav-pills nav-fill flex-column flex-sm-row">

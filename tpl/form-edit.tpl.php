@@ -35,7 +35,8 @@ require_once('dbconfig.inc.php');
 								<!-- Character ID -->
 								<div class="input-group input-group-sm">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Character ID&nbsp;<a target="_blank" href="https://havoc-wow.com/armory">(armory)</a></span>
+										<span class="input-group-text">Character ID</span>
+										<button class="btn btn-info" type="button" data-toggle="modal" data-target="#characterIdModal">?</button>
 									</div>
 									<input class="form-control" type="number" name="character-id" placeholder="Character ID" required>
 								</div>
@@ -46,7 +47,8 @@ require_once('dbconfig.inc.php');
 								</div>
 								<div class="input-group input-group-sm">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Display Item Entry&nbsp;<a target="_blank" href="https://havoc-wow.com/armory">(armory)</a></span>
+										<span class="input-group-text">Display Item Entry</span>
+										<button class="btn btn-info" type="button" data-toggle="modal" data-target="#displayItemEntryModal">?</button>
 									</div>
 									<input class="form-control" type="number" name="display-id" id="display-id" placeholder="Display Item Entry" disabled>
 								</div>
