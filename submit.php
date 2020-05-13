@@ -10,8 +10,8 @@ session_start();
 
 require_once('php-libs/HTMLUtil.class.php');
 
-if (!isset($_POST['submitButton']) && !isset($_REQUEST['account_id'])) 
-	die(HTMLUtil::bootstrapAlert('You did not submit the form correctly!'));
+/* if (!isset($_POST['submitButton']) && !isset($_REQUEST['account_id'])) 
+	die(HTMLUtil::bootstrapAlert('You did not submit the form correctly!')); */
 
 require_once('dbconfig.inc.php');
 require_once('const.inc.php');

@@ -10,7 +10,7 @@
 $cItem_json = file_get_contents('cItems.json');
 $cItems = json_decode($cItem_json, true);
 ?>
-<form action="submit.php" method="post">
+<form id="create" action="submit.php" method="post">
 	<div class="accordion" id="accordionContent">
 		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingOne">

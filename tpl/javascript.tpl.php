@@ -65,5 +65,25 @@ $(document).ready(function() {
 	}
 	?>
 	register();
+
+	$("#create, #edit").submit(function(e) {
+		e.preventDefault();
+
+		var form = $(this);
+		var url = form.attr('action');
+
+		$.ajax({
+			   type: "POST",
+			   url: url,
+			   data: form.serialize(),
+			   beforeSend: function () {
+				   $("#ajaxContainer").html("<div class=\"spinner-border mx-auto text-light\" style=\"display: block;\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>");
+			   },
+			   success: function(data)
+			   {
+				   $("#ajaxContainer").html(data);
+			   }
+			 });
+	});
 });
 </script>

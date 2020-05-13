@@ -10,7 +10,7 @@
 require_once('php-libs/TextHelper.class.php');
 require_once('dbconfig.inc.php');
 ?>
-<form action="submit.php?page=edit" method="post">
+<form id="edit" action="submit.php?page=edit" method="post">
 	<div class="accordion" id="accordionContent">
 		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingOne">

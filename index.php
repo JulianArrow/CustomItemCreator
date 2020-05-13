@@ -18,7 +18,7 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<?php
-		HTMLUtil::includeScript('jquery', '3rdParty/', '.slim.min.js');
+		HTMLUtil::includeScript('jquery', '3rdParty/', '.min.js');
 		HTMLUtil::includeScript('popper', '3rdParty/', '.min.js');
 		HTMLUtil::includeScript('bootstrap', '3rdParty/', '.min.js');
 		HTMLUtil::includeStyle('bootstrap', '3rdParty/', '.min.css');
@@ -27,6 +27,7 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 		?>
 	</head>
 	<body>
+		<div id="ajaxContainer"></div>
 		<div id="content">
 			<ul class="nav nav-pills nav-fill flex-column flex-sm-row">
 				<li class="flex-sm-fill text-sm-center nav-item">

@@ -1,8 +1,12 @@
 body {
-		background-color: #343a40f2;
+		background-color: #343a40f2 !important;
 }
 #tab-content {
 	color: var(--light);
+}
+
+#ajaxContainer {
+	margin: 0 8px;
 }
 
 @media (min-width: 576px) {
