@@ -12,10 +12,10 @@ $cItems = json_decode($cItem_json, true);
 ?>
 <form action="submit.php" method="post">
 	<div class="accordion" id="accordionContent">
-		<div class="card">
+		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
-					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					<button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 					Step 1: Choose base item, display ID, name and description
 					</button>
 				</h5>
@@ -106,10 +106,10 @@ $cItems = json_decode($cItem_json, true);
 				</div>
 			</div>
 		</div>
-		<div class="card">
+		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingTwo">
 				<h5 class="mb-0">
-					<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 					Step 2: Add primary and common secondary stats (optional)
 					</button>
 				</h5>
@@ -124,10 +124,10 @@ $cItems = json_decode($cItem_json, true);
 				</div>
 			</div>
 		</div>
-		<div class="card">
+		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingThree">
 				<h5 class="mb-0">
-					<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
 					Step 3: Add other stats and make the item accountbound (optional)
 					</button>
 				</h5>
@@ -143,7 +143,7 @@ $cItems = json_decode($cItem_json, true);
 			</div>
 		</div>
 	</div>
-	<input type="submit" value="Create" class="btn btn-primary" id="submitButton" name="submitButton" disabled>
+	<input type="submit" value="Create" class="btn btn-dark" id="submitButton" name="submitButton" disabled>
 	
 </form>
 <?php

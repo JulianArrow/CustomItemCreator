@@ -93,6 +93,10 @@ function buy (id) {
 	incrToken(id);
 	incrCosts(Number($(".input-group-prepend:has(#" + id + "-plus) > .input-group-text > .prize").text()));
 	checkSubmitButton();
+	if (!checkCaps()) {
+		checkCaps(true);
+		notBuy(id);
+	}
 }
 
 function notBuy (id) {
@@ -153,48 +157,73 @@ function isCreateForm () {
 
 function checkSubmitButton () {
 	if (!isCreateForm()) {
-		if (Number($("#costs > span").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=custom-id]").val() != '' && checkCaps()) {
+		if (Number($("#costs > span").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=custom-id]").val() != '' && checkCaps(true)) {
 			enab('submitButton');
+			return true;
 		} else {
 			disab('submitButton');
+			return false;
 		}
 	} else {
-		if (Number($("#costs > span").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=name]").val() != '' && checkCaps() && $("[name=display-id]").val() != '' && $("[name=character-id]").val() != '') {
+		if (Number($("#costs > span").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=name]").val() != '' && checkCaps(true) && $("[name=display-id]").val() != '' && $("[name=character-id]").val() != '') {
 			enab('submitButton');
+			return true;
 		} else {
 			disab('submitButton');
+			return false;
 		}
 	}
 }
 
-function checkCaps () {
+function checkCaps (alertMode = false) {
 	if (($("#stamina").val() > mainStatCap) || ($("#agility").val() > mainStatCap) || ($("#spirit").val() > mainStatCap) || ($("#intelligence").val() > mainStatCap) || ($("#strength").val() > mainStatCap)) {
-		alert('main-stat-cap is ' + mainStatCap);
-		return false;
+		if (alertMode) {
+			alert('main-stat-cap is ' + mainStatCap);
+		} else {
+			return false;
+		}
 	}
 	if ($("#haste").val() > hasteCap) {		
-		alert('haste-cap is ' + hasteCap);
-		return false;
+		if (alertMode) {
+			alert('haste-cap is ' + hasteCap);
+		} else {
+			return false;
+		}
 	}
 	if ($("#weapon-dmg").val() > weaponDamageCap) {
-		alert('weapon-damage-cap is ' + weaponDamageCap);
-		return false;
+		if (alertMode) {
+			alert('weapon-damage-cap is ' + weaponDamageCap);
+		} else {
+			return false;
+		}
 	}
 	if ($("#weapon-spe").val() > weaponSpeed2hCap) {
-		alert('weapon-speed-cap for 2h is ' + weaponSpeed2hCap + ' and for 1h is ' + weaponSpeedCap);
-		return false;
+		if (alertMode) {
+			alert('weapon-speed-cap for 2h is ' + weaponSpeed2hCap + ' and for 1h is ' + weaponSpeedCap);
+		} else {
+			return false;
+		}
 	}
 	if ($("#resilience").val() > resilienceCap) {
-		alert('resilience-cap is ' + resilienceCap);
-		return false;
+		if (alertMode) {
+			alert('resilience-cap is ' + resilienceCap);
+		} else {
+			return false;
+		}
 	}
 	if ($("#magic-res").val() > magicResCap) {
-		alert('magic-resistance-cap is ' + magicResCap);
-		return false;
+		if (alertMode) {
+			alert('magic-resistance-cap is ' + magicResCap);
+		} else {
+			return false;
+		}
 	}
 	if (parseInt($("#reg-gem").val()) + parseInt($("#meta-gem").val()) > 3) {
-		alert('max gem-socket-count is 3');
-		return false;
+		if (alertMode) {
+			alert('max gem-socket-count is 3');
+		} else {
+			return false;
+		}
 	}
 	return true;
 }

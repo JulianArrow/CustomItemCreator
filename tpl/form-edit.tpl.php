@@ -12,10 +12,10 @@ require_once('dbconfig.inc.php');
 ?>
 <form action="submit.php?page=edit" method="post">
 	<div class="accordion" id="accordionContent">
-		<div class="card">
+		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
-					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					<button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 					Step 1: Change display item enty, name and description
 					</button>
 				</h5>
@@ -102,10 +102,10 @@ require_once('dbconfig.inc.php');
 				</div>
 			</div>
 		</div>
-		<div class="card">
+		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingTwo">
 				<h5 class="mb-0">
-					<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 					Step 2: Add primary and common secondary stats
 					</button>
 				</h5>
@@ -120,10 +120,10 @@ require_once('dbconfig.inc.php');
 				</div>
 			</div>
 		</div>
-		<div class="card">
+		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingThree">
 				<h5 class="mb-0">
-					<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
 					Step 3: Add other stats or make the item accountbound
 					</button>
 				</h5>
@@ -139,7 +139,7 @@ require_once('dbconfig.inc.php');
 			</div>
 		</div>
 	</div>
-	<input type="submit" value="Edit" class="btn btn-primary" id="submitButton" name="submitButton" disabled>
+	<input type="submit" value="Edit" class="btn btn-dark" id="submitButton" name="submitButton" disabled>
 	
 </form>
 <?php

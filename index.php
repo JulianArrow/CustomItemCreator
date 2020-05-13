@@ -30,16 +30,16 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 		<div id="content">
 			<ul class="nav nav-pills nav-fill flex-column flex-sm-row">
 				<li class="flex-sm-fill text-sm-center nav-item">
-					<a class="nav-link<?=!isset($_GET['page'])?' active':''?>" href="index.php">Frequently Asked Questions</a>
+					<a class="nav-link<?=!isset($_GET['page'])?' active btn-dark':' text-light'?>" href="index.php">Frequently Asked Questions</a>
 				</li>
 				<li class="flex-sm-fill text-sm-center nav-item">
-					<a class="nav-link<?=(isset($_GET['page']) && $_GET['page'] == 'create')?' active':''?>" href="index.php?page=create">Create a new custom-item</a>
+					<a class="nav-link<?=(isset($_GET['page']) && $_GET['page'] == 'create')?' active btn-dark':' text-light'?>" href="index.php?page=create">Create a new custom-item</a>
 				</li>
 				<li class="flex-sm-fill text-sm-center nav-item">
-					<a class="nav-link<?=(isset($_GET['page']) && $_GET['page'] == 'edit')?' active':''?>" href="index.php?page=edit">Edit an existing custom-item</a>
+					<a class="nav-link<?=(isset($_GET['page']) && $_GET['page'] == 'edit')?' active btn-dark':' text-light'?>" href="index.php?page=edit">Edit an existing custom-item</a>
 				</li>
 				<li class="flex-sm-fill text-sm-center nav-item">
-					<a class="nav-link" href="https://docs.google.com/forms/d/17musG6o4Jbh9-uhhLcNqwfsNHBoZice1tBk2qYym6A4/viewform">Give us feedback!</a>
+					<a class="nav-link text-light" href="https://docs.google.com/forms/d/17musG6o4Jbh9-uhhLcNqwfsNHBoZice1tBk2qYym6A4/viewform">Give us feedback!</a>
 				</li>
 			</ul>
 			<div id="tab-content">

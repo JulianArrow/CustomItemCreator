@@ -1,3 +1,10 @@
+body {
+		background-color: #343a40f2;
+}
+#tab-content {
+	color: var(--light);
+}
+
 @media (min-width: 576px) {
 	#content {
 		margin: 36px;
@@ -9,9 +16,10 @@
 
 	#costs {
 		position: fixed;
-		right: 32px;
-		bottom: 16px;
-		border: 1px solid #aaa;
+		right: 64px;
+		font-size: 110%;
+		bottom: 32px;
+		border: 1px solid #222;
 	}
 
 	[name=submitButton] {
@@ -41,6 +49,7 @@
 	
 	#costs {
 		box-shadow: none !important;
+		margin: 8px 4px;
 	}
 }
 .input-group {
