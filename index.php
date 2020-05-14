@@ -84,7 +84,7 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>The item-base may be any donor or vip item available on the webstore or ingame. Weapons and gear farmed in instances are not customizable.</p>
+						<p>The item-base may be any donor or vip item available on the webstore or ingame. Weapons and gear farmed in instances are not customizable. The items beginning with a star (*) are the vip items you bought from the ingame vendor. Webstore vip items are without that *.</p>
 					</div>
 				</div>
 			</div>
