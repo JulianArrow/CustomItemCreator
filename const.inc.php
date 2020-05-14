@@ -154,7 +154,7 @@ const cItemTable = [
 	'entryColumn' => 'Item_entry'
 ];
 
-const itemReloadCmd = 'reload_item_template';
+const itemReloadCmd = 'reload item_template';
 
 const statValueMax = 8388607;
 
