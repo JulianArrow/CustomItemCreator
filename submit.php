@@ -92,7 +92,7 @@ if (!isset($_GET['page']) || isset($_POST['use-name'])) {
 if ((!isset($_GET['page']) || isset($_POST['use-name'])) && isset($_POST['name'])  && preg_match('/^[a-zA-Z0-9 \'?!.,]{1,100}$/', $_POST['name']))
 	$name = $_POST['name'];
 elseif ((!isset($_GET['page']) || isset($_POST['use-name'])) && (!isset($_POST['name']) || !preg_match('/^[a-zA-Z0-9 \'?!.,]{1,100}$/', $_POST['name'])))
-	die(HTMLUtil::bootstrapAlert('name may only contain: a-zA-Z0-9 \'?!.,'));
+	die(HTMLUtil::bootstrapAlert('item-name may only contain: a-zA-Z0-9 \'?!.,'));
 
 #token-validate
 $costs = 0;

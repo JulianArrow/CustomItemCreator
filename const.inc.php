@@ -162,10 +162,10 @@ const entryMin = 16000300;
 
 const keepItem = ['prize' => 10];
 
-const mainStatCap = 8300000;
-const hasteCap = 12000;
-const resilienceCap = 6000;
-const weaponDamageCap = 600000; #dmg_max1
+const mainStatCap = 1000000;
+const hasteCap = 32767;
+const resilienceCap = 800;
+const weaponDamageCap = 1000000; #dmg_max1
 const magicResCap = 250;
 const weaponSpeedCap = 3.0; #1h+dagger
 const weaponSpeed2hCap = 4.0; #bows+2h+guns+polearm

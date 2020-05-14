@@ -3,6 +3,7 @@
  * @author Julian Pfeil <julian.7.pfeil@gmail.com>
  * @version 1.0.0
  */
+session_start();
  
 require_once('const.inc.php');
 require_once('php-libs/TemplateHelper.class.php');
@@ -38,7 +39,7 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>Lorem ipsum. Display Item Entry.</p>
+						<p>Search for the name of an item in our <a href="https://havoc-wow.com/armory">armory</a> and look at the link. If the link is "https://havoc-wow.com/item/1/156105" 156105 is the number to put into this field.</p>
 					</div>
 				</div>
 			</div>
@@ -53,7 +54,37 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>Lorem ipsum. Character Id.</p>
+						<p>Search for the name of the character you got the item-base and want the custom-item on in our <a href="https://havoc-wow.com/armory">armory</a> and look at the link. If the link is "https://havoc-wow.com/character/1/56567" 56567 is the number to put into this field.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="keepItemBaseModal" tabindex="-1" role="dialog" aria-labelledby="keepItemBaseModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="keepItemBaseModalLabel">Keep item-base</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>If you don't check this the item-base gets removed after you got the custom-item.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="itemBaseModal" tabindex="-1" role="dialog" aria-labelledby="itemBaseModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="itemBaseModalLabel">Item-base</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>The item-base may be any donor or vip item available on the webstore or ingame. Weapons and gear farmed in instances are not customizable.</p>
 					</div>
 				</div>
 			</div>
@@ -74,6 +105,9 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 				</li>
 				<li class="flex-sm-fill text-sm-center nav-item">
 					<a class="nav-link text-light" href="https://docs.google.com/forms/d/17musG6o4Jbh9-uhhLcNqwfsNHBoZice1tBk2qYym6A4/viewform">Give us feedback!</a>
+				</li>
+				<li class="flex-sm-fill text-sm-center nav-item">
+					<a class="nav-link text-light" href="#"><?=(!isset($_SESSION['']['id']) || !is_numeric($_SESSION['']['id']))?'You need to log in':'You\'re logged in'?></a>
 				</li>
 			</ul>
 			<div id="tab-content">

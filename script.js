@@ -1,4 +1,15 @@
+var statsAdded = [];
+var dontCountAsStats = ['meta-gem', 'reg-gem', 'weapon-dmg', 'weapon-spe', 'armor', 'magic-res'];
+
+function checkStatsAdded () {
+	$("#costs > #statsAdded").text(statsAdded.length);
+}
+
 function incr (id, amount) {
+	if (amount > 0 && !statsAdded.includes(id) && !dontCountAsStats.includes(id)) {
+		statsAdded.push(id);
+		checkStatsAdded();
+	}
 	if ($("#" + id).val() === false) {
 		$("#" + id).val(0);
 	}
@@ -10,6 +21,15 @@ function decr (id, amount) {
 		$("#" + id).val(0);
 	}
 	$("#" + id).val(Number($("#" + id).val()) - Number(amount));
+	
+	if ($("#" + id).val() == 0 && statsAdded.includes(id) && !dontCountAsStats.includes(id)) {
+		for(var i = statsAdded.length - 1; i >= 0; i--) {
+			if(statsAdded[i] == id) {
+				statsAdded.splice(i, 1);
+			}
+		}
+		checkStatsAdded();
+	}
 }
 
 function incrToken (id) {
@@ -41,7 +61,7 @@ function nullTokens () {
 }
 
 function nullCosts() {
-	$("#costs > span").text(0);
+	$("#costs > #costsNumber").text(0);
 }
 
 function nullStats () {
@@ -77,11 +97,11 @@ function resetKeepCheckbox() {
 }
 
 function incrCosts (amount) {
-	$("#costs > span").text(Number($("#costs > span").text()) + Number(amount));
+	$("#costs > #costsNumber").text(Number($("#costs > #costsNumber").text()) + Number(amount));
 }
 
 function decrCosts (amount) {
-	$("#costs > span").text(Number($("#costs > span").text()) - Number(amount));
+	$("#costs > #costsNumber").text(Number($("#costs > #costsNumber").text()) - Number(amount));
 }
 
 function buy (id) {
@@ -157,7 +177,7 @@ function isCreateForm () {
 
 function checkSubmitButton () {
 	if (!isCreateForm()) {
-		if (Number($("#costs > span").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=custom-id]").val() != '' && checkCaps(true)) {
+		if (Number($("#costs > #costsNumber").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=custom-id]").val() != '' && checkCaps(true)) {
 			enab('submitButton');
 			return true;
 		} else {
@@ -165,7 +185,7 @@ function checkSubmitButton () {
 			return false;
 		}
 	} else {
-		if (Number($("#costs > span").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=name]").val() != '' && checkCaps(true) && $("[name=display-id]").val() != '' && $("[name=character-id]").val() != '') {
+		if (Number($("#costs > #costsNumber").text()) > 0 && $("[name=character-id]").val() != '' && $("[name=name]").val() != '' && checkCaps(true) && $("[name=display-id]").val() != '' && $("[name=character-id]").val() != '') {
 			enab('submitButton');
 			return true;
 		} else {
@@ -176,7 +196,7 @@ function checkSubmitButton () {
 }
 
 function checkCaps (alertMode = false) {
-	if (($("#stamina").val() > mainStatCap) || ($("#agility").val() > mainStatCap) || ($("#spirit").val() > mainStatCap) || ($("#intelligence").val() > mainStatCap) || ($("#strength").val() > mainStatCap)) {
+	if (($("#stamina").val() > mainStatCap) || ($("#agility").val() > mainStatCap) || ($("#spirit").val() > mainStatCap) || ($("#intellect").val() > mainStatCap) || ($("#strength").val() > mainStatCap)) {
 		if (alertMode) {
 			alert('main-stat-cap is ' + mainStatCap);
 		} else {
@@ -329,4 +349,38 @@ function register () {
 		registerAbCheckbox();
 		registerButtons();
 	}
+}
+
+var error = [];
+
+function errorOnForm (id) {
+	$("#" + id).addClass("is-invalid");
+	error.push(id);
+}
+
+function errorOnFormReset () {
+	error = [];
+	$("#" + id).removeClass("is-invalid");
+}
+
+function checkForErrorField (data) {
+	if (data.search("alert-danger") > -1) {
+		if (data.search("item-base") > -1 || data.search("own the item") > -1)
+			errorOnForm("item-base");
+		if (data.search("display") > -1)
+			errorOnForm("display-id");
+		if (data.search("name-color") > -1)
+			errorOnForm("name-color");
+		if (data.search("item-name") > -1)
+			errorOnForm("name");
+		if (data.search("character-id") > -1 || data.search("on your account") > -1)
+			errorOnForm("character-id");
+		if (data.search("item-name") > -1)
+			errorOnForm("name");
+		if (data.search("description may only") > -1)
+			errorOnForm("description");
+		if (data.search("description-color") > -1)
+			errorOnForm("description-color");
+	} else 
+		errorOnFormReset();
 }

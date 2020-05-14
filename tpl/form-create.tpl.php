@@ -16,7 +16,7 @@ $cItems = json_decode($cItem_json, true);
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
 					<button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-					Step 1: Choose base item, display ID, name and description
+					Step 1: Choose item-base, display ID, name and description
 					</button>
 				</h5>
 			</div>
@@ -28,10 +28,11 @@ $cItems = json_decode($cItem_json, true);
 								<!-- Item Base -->
 								<div class="input-group input-group-sm">
 									<div class="input-group-prepend">
-										<span class="input-group-text">Item Base</span>
+										<span class="input-group-text">Item-base</span>
+										<button class="btn btn-info" type="button" data-toggle="modal" data-target="#itemBaseModal">?</button>
 									</div>
 									<select class="custom-select custom-select-sm" name="item-base">
-										<option value="none" selected>Choose the item base...</option>
+										<option value="none" selected>Choose the item-base...</option>
 										<?php
 											foreach ($cItems as $cItem) {
 												echo '<option value="'.$cItem['entry'].'">'.$cItem['name'].'</option>'."\n";
@@ -42,7 +43,9 @@ $cItems = json_decode($cItem_json, true);
 								<input type="hidden" value="0" name="keep-item-token" id="keep-item">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input" id="keep-item-checkbox">
-									<label class="custom-control-label" for="keep-item-checkbox"><small>Keep the base-item (<span class="prize"><?=keepItem['prize']?></span>&nbsp;DP)</small></label>
+									<label class="custom-control-label" for="keep-item-checkbox"><small>Keep the item-base (<span class="prize"><?=keepItem['prize']?></span>&nbsp;DP)</small></label>
+								
+									<button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#keepItemBaseModal">?</button>
 								</div>
 								<!-- Display ID -->
 								<div class="input-group input-group-sm">

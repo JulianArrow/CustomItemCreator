@@ -9,6 +9,12 @@ body {
 	margin: 0 8px;
 }
 
+.is-invalid {
+	border-width: 1.5px;
+    background-color: #f8d7da;
+    z-index: 10;
+}
+
 @media (min-width: 576px) {
 	#content {
 		margin: 36px;

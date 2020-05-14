@@ -48,7 +48,7 @@ $(document).ready(function() {
 		foreach ($cItems as $cItem) {
 			echo 'case \''.$cItem['entry'].'\':';
 			foreach ($cItem['stats'] as $statKey => $stat) {
-				echo 'stat(\''.$statKey.'\', '.$stat.');';
+				echo 'incr(\''.$statKey.'\', '.$stat.');';
 			}
 			echo 'break;';
 		}
@@ -77,11 +77,12 @@ $(document).ready(function() {
 			   url: url,
 			   data: form.serialize(),
 			   beforeSend: function () {
-				   $("#ajaxContainer").html("<div class=\"spinner-border mx-auto text-light\" style=\"display: block;\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>");
+				   $("#ajaxContainer").html("<br><div class=\"spinner-border mx-auto text-light\" style=\"display: block;\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>");
 			   },
 			   success: function(data)
 			   {
 				   $("#ajaxContainer").html(data);
+				   checkForErrorField(data);
 			   }
 			 });
 	});
