@@ -15,6 +15,11 @@ require_once('../dbconfig.inc.php');
 
 $results = $website->select('custom_form_log', [], -1, '*', 'log_id', true);
 ?>
+<style>
+td {
+	word-break: break-all;
+}
+</style>
 <table class="table table-bordered" style="margin: 8px auto; max-width: 75%;">
 	<thead>
 		<tr>
@@ -25,6 +30,7 @@ $results = $website->select('custom_form_log', [], -1, '*', 'log_id', true);
 			<th scope="col">Weapon-Name</th>
 			<th scope="col">Weapon-Description</th>
 			<th scope="col">Costs</th>
+			<th scope="col">Date</th>
 			<th scope="col">Receipt</th>
 		</tr>
 	</thead>
@@ -39,6 +45,7 @@ foreach ($results as $result) {
 			  <td>'.$result['name'].'</td>
 			  <td>'.$result['description'].'</td>
 			  <td>'.$result['costs'].'</td>
+			  <td>'.$result['date'].'</td>
 			  <td>'.$result['receipt'].'</td>
 			</tr>';
 }

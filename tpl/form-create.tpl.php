@@ -39,6 +39,7 @@ $cItems = json_decode($cItem_json, true);
 											}
 										?>
 									</select>
+									<input type="hidden" value="0" name="handed-token" id="handed">
 								</div>
 								<input type="hidden" value="0" name="keep-item-token" id="keep-item">
 								<div class="custom-control custom-checkbox">
@@ -61,7 +62,7 @@ $cItems = json_decode($cItem_json, true);
 										<span class="input-group-text">Character ID</span>
 										<button class="btn btn-info" type="button" data-toggle="modal" data-target="#characterIdModal">?</button>
 									</div>
-									<input class="form-control" type="number" name="character-id" placeholder="Character ID" required>
+									<input class="form-control" type="number" name="character-id" id="character-id" placeholder="Character ID" required>
 								</div>
 								<!-- Name -->
 								<div class="input-group input-group-sm">

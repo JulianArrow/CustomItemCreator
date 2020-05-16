@@ -14,6 +14,19 @@ body {
     background-color: #f8d7da;
     z-index: 10;
 }
+.is-valid {
+	border-width: 1.5px;
+    background-color: #d4edda;
+    z-index: 10;
+}
+
+.btn-outline-secondary {
+	font-weight: bolder;
+}
+
+#weapon {
+	display: none;
+}
 
 @media (min-width: 576px) {
 	#content {

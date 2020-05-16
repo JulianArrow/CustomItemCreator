@@ -98,11 +98,12 @@ elseif ((!isset($_GET['page']) || isset($_POST['use-name'])) && (!isset($_POST['
 $costs = 0;
 $addStats = [];
 foreach(stats as $key => $stat) {
-	if (!isset($_POST[$stat['type'].'-token']) || !is_numeric($_POST[$stat['type'].'-token']) || (int)$_POST[$stat['type'].'-token'] < 0) {
+	if (!isset($_POST[$stat['type'].'-token']) || !is_numeric($_POST[$stat['type'].'-token']) || ((int)$_POST[$stat['type'].'-token'] < 0 && $stat['type'] != 'weapon-spe')) {
 		die(HTMLUtil::bootstrapAlert('token-value must be numeric and 0 or bigger.'));
 	} else {
-		if ((int)$_POST[$stat['type'].'-token'] > 0) {
-			$costs += (int)$_POST[$stat['type'].'-token']*stats[$key]['prize'];
+		$count = abs((int)$_POST[$stat['type'].'-token']);
+		if ($count > 0) {
+			$costs += $count*stats[$key]['prize'];
 			$addStats[$key] = (int)$_POST[$stat['type'].'-token']*stats[$key]['amount'];
 		}
 	}
@@ -176,11 +177,15 @@ if (isset($addStats['A'])) {
 	unset($addStats['A']);
 }
 if (isset($addStats['B'])) {
-	$custom['delay'] = (int)$custom['delay'] + (((int)$addStats['B'])*1000);
-	if ($custom['class'] == 2 && ($custom['subclass'] == 0 || $custom['subclass'] == 4 || $custom['subclass'] == 7 || $custom['subclass'] == 13 || $custom['subclass'] == 15) && (int)$custom['delay'] > (int)weaponSpeedCap*1000) 
-		die(HTMLUtil::bootstrapAlert('weapon-speed must not be over '.weaponSpeedCap));
-	elseif ((int)$custom['delay'] > (int)weaponSpeed2hCap*1000)
-		die(HTMLUtil::bootstrapAlert('weapon-speed must not be over '.weaponSpeed2hCap));
+	$custom['delay'] = (int)$custom['delay'] + floatval($addStats['B'])*1000;
+	if ($cItem['class'] == 2 && in_array($cItem['subclass'], [0, 4, 7, 13, 15]))
+		if ($custom['delay'] > weaponSpeedCap)
+			die(HTMLUtil::bootstrapAlert('weapon-speed must not be over '.weaponSpeedCap));
+	elseif ($cItem['class'] == 2 && in_array($cItem['subclass'], [1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20]))
+		if ($custom['delay'] > weaponSpeed2hCap)
+			die(HTMLUtil::bootstrapAlert('weapon-speed must not be over '.weaponSpeed2hCap));
+	else 
+		$custom['delay'] = 0;
 	unset($addStats['B']);
 }
 $gemCount = 0;

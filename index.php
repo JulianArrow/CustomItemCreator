@@ -6,6 +6,7 @@
 session_start();
  
 require_once('const.inc.php');
+require_once('dbconfig.inc.php');
 require_once('php-libs/TemplateHelper.class.php');
 require_once('php-libs/HTMLUtil.class.php');
 
@@ -107,7 +108,14 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 					<a class="nav-link text-light" href="https://docs.google.com/forms/d/17musG6o4Jbh9-uhhLcNqwfsNHBoZice1tBk2qYym6A4/viewform">Give us feedback!</a>
 				</li>
 				<li class="flex-sm-fill text-sm-center nav-item">
-					<a class="nav-link text-light" href="#"><?=(!isset($_SESSION['']['id']) || !is_numeric($_SESSION['']['id']))?'You need to log in':'You\'re logged in'?></a>
+					<a class="nav-link text-light" href="<?php
+					if(!isset($_SESSION['']['id']) || !is_numeric($_SESSION['']['id'])) {
+						echo 'https://havoc-wow.com/login">You need to log in'; 
+					} else {
+						$result = $website->select('account_data', ['id' => $_SESSION['']['id']], 1, 'dp');
+						echo 'https://havoc-wow.com/ucp">You\'re logged in (DP: '.$result['dp'].')';
+					}
+					?></a>
 				</li>
 			</ul>
 			<div id="tab-content">

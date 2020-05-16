@@ -37,7 +37,7 @@ foreach ($results as &$result)  {
 		}
 	}
 	
-	$result['stats']['weapon-dmg'] = ($result['dmg_min1'] + $result['dmg_max1'])/2;
+	$result['stats']['weapon-dmg'] = $result['dmg_max1'];
 	$result['stats']['weapon-spe'] = $result['delay']/1000;
 	
 	$gemCount = 0;

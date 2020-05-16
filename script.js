@@ -1,3 +1,15 @@
+var error;
+
+function errorOnForm (id) {
+	$("[name=" + id + "]").addClass("is-invalid");
+	error = id;
+}
+
+function errorOnFormReset () {
+	$("[name=" + error + "]").removeClass("is-invalid");
+	error = null;
+}
+
 var statsAdded = [];
 var dontCountAsStats = ['meta-gem', 'reg-gem', 'weapon-dmg', 'weapon-spe', 'armor', 'magic-res'];
 
@@ -55,7 +67,7 @@ function stat (id, amount) {
 function nullTokens () {
 	ids.forEach(function(id) {
 		$("[name=" + id + "-token]").val('0');
-		if ($("#" + id + "-minus").prop('disabled') === false) 
+		if ($("#" + id + "-minus").prop('disabled') === false && id != "weapon-spe") 
 			disab(id + '-minus');
 	});
 }
@@ -108,10 +120,13 @@ function buy (id) {
 	if ($("[name=" + id + "-token]").val() == 0) {
 		enab(id + '-minus');
 	}
-	amount = $("#" + id + "-plus > .amount").text();
+	amount = Number($("#" + id + "-plus > .amount").text());
+	costs = Number($(".input-group-prepend:has(#" + id + "-plus) > .input-group-text > .prize").text());
 	incr(id, amount);
 	incrToken(id);
-	incrCosts(Number($(".input-group-prepend:has(#" + id + "-plus) > .input-group-text > .prize").text()));
+	incrCosts(costs);
+	if (id == "weapon-spe" && $("[name=weapon-spe-token]").val() < 0)
+		decrCosts(2*costs);
 	checkSubmitButton();
 	if (!checkCaps()) {
 		checkCaps(true);
@@ -119,12 +134,31 @@ function buy (id) {
 	}
 }
 
+function buySpe () {
+	amount = Number($("#weapon-spe-plus > .amount").text());
+	costs = Number($(".input-group-prepend:has(#weapon-spe-plus) > .input-group-text > .prize").text());
+	decr("weapon-spe", amount);
+	decrToken("weapon-spe");
+	if ($("[name=weapon-spe-token]").val() < 0) 
+		incrCosts(costs);
+	else
+		decrCosts(costs);
+	checkSubmitButton();
+	if (!checkCaps()) {
+		checkCaps(true);
+	incr("weapon-spe", amount);
+	incrToken("weapon-spe");
+	decrCosts(costs);
+	}
+}
+
 function notBuy (id) {
-	amount = $("#" + id + "-plus > .amount").text();
+	amount = Number($("#" + id + "-plus > .amount").text());
+	costs = Number($(".input-group-prepend:has(#" + id + "-plus) > .input-group-text > .prize").text());
 	decr(id, amount);
 	decrToken(id);
-	decrCosts(Number($(".input-group-prepend:has(#" + id + "-plus) > .input-group-text > .prize").text()));
-	if ($("[name=" + id + "-token]").val() == 0) {
+	decrCosts(costs);
+	if ($("[name=" + id + "-token]").val() == 0 && id != "weapon-spe") {
 		disab(id + '-minus');
 	}
 	checkSubmitButton();
@@ -133,7 +167,7 @@ function notBuy (id) {
 function enabStats () {
 	ids.forEach(function(id) {
 		enab(id + '-plus');
-		if ($("[name=" + id + "-token]").val() > 0) {
+		if ($("[name=" + id + "-token]").val() > 0 || id == "weapon-spe") {
 			enab(id + '-minus');
 		}
 	});
@@ -142,8 +176,25 @@ function enabStats () {
 function disabStats () {
 	ids.forEach(function(id) {
 		disab(id + '-plus');
-		if ($("[name=" + id + "-token]").val() > 0) {
+		if ($("[name=" + id + "-token]").val() > 0 || id == "weapon-spe") {
 			disab(id + '-minus');
+		}
+	});
+}
+
+function onLoadCustom () {
+	var entry = $("[name=custom-id]").val();
+	$.getScript( "onLoadCustom.js.php?entry=" + entry, function(data) {
+		if (data == '') {
+			if ($("[name=custom-id]").hasClass("is-valid"))
+				$("[name=custom-id]").removeClass("is-valid");
+			errorOnForm("custom-id");
+			disabStats();
+			noStats();
+		} else {
+			onLoadCustomFunction();
+			errorOnFormReset();
+			$("[name=custom-id]").addClass("is-valid");
 		}
 	});
 }
@@ -162,9 +213,18 @@ function registerMinusButtons () {
 	ids.forEach(function(id) {
 		$("#" + id +"-minus").click(function () {
 			if ($(this).prop('disabled') === false) {
-				notBuy(id);
+				if (id != "weapon-spe")
+					notBuy(id);
+				else 
+					buySpe();
 			}
 		});
+	});
+}
+
+function registerOnLoadCustom () {
+	$("#onLoadCustom").click(function () {
+		onLoadCustom();
 	});
 }
 
@@ -217,9 +277,23 @@ function checkCaps (alertMode = false) {
 			return false;
 		}
 	}
-	if ($("#weapon-spe").val() > weaponSpeed2hCap) {
+	if ($("#weapon-spe").val() > weaponSpeed2hCap && $("[name=handed-token]").val() == 2) {
 		if (alertMode) {
-			alert('weapon-speed-cap for 2h is ' + weaponSpeed2hCap + ' and for 1h is ' + weaponSpeedCap);
+			alert('weapon-speed-cap for 2h is ' + weaponSpeed2hCap);
+		} else {
+			return false;
+		}
+	}
+	if ($("#weapon-spe").val() > weaponSpeedCap && $("[name=handed-token]").val() == 1) {
+		if (alertMode) {
+			alert('weapon-speed-cap for 1h is ' + weaponSpeedCap);
+		} else {
+			return false;
+		}
+	}
+	if ($("#weapon-spe").val() < weaponSpeedMin && $("[name=handed-token]").val() > 0) {
+		if (alertMode) {
+			alert('weapon-speed-min is ' + weaponSpeedMin);
 		} else {
 			return false;
 		}
@@ -241,6 +315,13 @@ function checkCaps (alertMode = false) {
 	if (parseInt($("#reg-gem").val()) + parseInt($("#meta-gem").val()) > 3) {
 		if (alertMode) {
 			alert('max gem-socket-count is 3');
+		} else {
+			return false;
+		}
+	}
+	if ($("#costs > #statsAdded").text() > 10) {
+		if (alertMode) {
+			alert('max stat-count is 10');
 		} else {
 			return false;
 		}
@@ -348,19 +429,8 @@ function register () {
 		registerRequiredFields();
 		registerAbCheckbox();
 		registerButtons();
+		registerOnLoadCustom();
 	}
-}
-
-var error = [];
-
-function errorOnForm (id) {
-	$("#" + id).addClass("is-invalid");
-	error.push(id);
-}
-
-function errorOnFormReset () {
-	error = [];
-	$("#" + id).removeClass("is-invalid");
 }
 
 function checkForErrorField (data) {

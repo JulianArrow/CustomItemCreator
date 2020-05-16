@@ -28,6 +28,7 @@ hasteCap = <?=hasteCap?>;
 weaponDamageCap = <?=weaponDamageCap?>;
 weaponSpeed2hCap = <?=weaponSpeed2hCap?>;
 weaponSpeedCap = <?=weaponSpeedCap?>;
+weaponSpeedMin = <?=weaponSpeedMin?>;
 resilienceCap = <?=resilienceCap?>;
 magicResCap = <?=magicResCap?>;
 
@@ -49,17 +50,29 @@ $(document).ready(function() {
 			echo 'case \''.$cItem['entry'].'\':';
 			foreach ($cItem['stats'] as $statKey => $stat) {
 				echo 'incr(\''.$statKey.'\', '.$stat.');';
+				if ($cItem['class'] == 2 && in_array($cItem['subclass'], [0, 4, 7, 13, 15]))
+					echo '$("[name=handed-token]").val(1);';
+				elseif ($cItem['class'] == 2 && in_array($cItem['subclass'], [1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20]))
+					echo '$("[name=handed-token]").val(2);';
+				else
+					echo '$("[name=handed-token]").val(0);';
 			}
 			echo 'break;';
 		}
 		?>
+		}
+		if ($(this).val() != 'none') {
+			if ($("[name=handed-token]").val() == 0) {
+				$("#weapon").css('display', 'none');
+			} else {
+				$("#weapon").css('display', 'block');
+			}
 		}
 		checkSubmitButton();
 	});
 	<?php
 	} elseif (isset($_GET['page']) && $_GET['page'] == 'edit') {
 	?>
-	enabStats();
 	nullStats();
 	<?php
 	}
