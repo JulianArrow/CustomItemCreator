@@ -168,7 +168,7 @@
 			<label class="custom-control-label" for="accountbound-checkbox"><small>Make the custom item accountbound (<span class="prize"><?=stats['E']['prize']?></span>&nbsp;DP)</small></label>
 		</div>
 	</div>
-	<div class="form-group" id="item-type-group">
+	<!--<div class="form-group" id="item-type-group">
 		<select class="custom-select custom-select-sm" name="item-type" id="item-type">
 			<option selected>Open this select menu</option>
 			<option value="head" class="gear">Head</option>
@@ -191,5 +191,5 @@
 			<option value="thrown">Thrown</option>
 			<option value="bow">Bow</option>
 		</select>
-	</div>
+	</div>-->
 </div>
