@@ -242,8 +242,8 @@ if (isset($addStats['C']) || isset ($addStats['D'])) {
 					$custom['socketColor_2'] = 1;
 				$custom['socketColor_1'] = 2;
 			}
-		} else {
-			if ($addStats['D'] == 2)
+		} elseif ($addStats['D'] > 0) {
+			if ($addStats['D'] == 3)
 				$custom['socketColor_3'] = 1;
 			if ($addStats['D'] == 2)
 				$custom['socketColor_2'] = 1;
@@ -352,12 +352,14 @@ if (!isset($_GET['page'])) {
 	$stayAddStats = $stayAddStats + ['keep-item' => $keepItemBool];
 }
 
+$time = time();
 $website->insert('custom_form_log', [
 	'account_id' => $id, 
 	'character_id' => $characterId, 
 	'weapon_entry' => $custom['entry'], 
 	'costs' => $costs, 
 	'name' => $custom['name'], 
+	'date' => $time, 
 	'description' => $custom['description'], 
 	'receipt' => print_r($stayAddStats, true)
 ]);

@@ -85,7 +85,22 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>The item-base may be any donor or vip item available on the webstore or ingame. Weapons and gear farmed in instances are not customizable. The items beginning with a star (*) are the vip items you bought from the ingame vendor. Webstore vip items are without that *.</p>
+						<p>The item-base may be any donor or vip item available on the webstore or ingame. Weapons and gear farmed in instances are not customizable. The items beginning with a star (*) are the vip items you bought from the ingame vendor. Webstore vip items are without that *. Attention: You may need a new patch-z (downloadable on our Discord server) to use some of your skills.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="customId" tabindex="-1" role="dialog" aria-labelledby="customIdModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="customIdModalLabel">Item-base</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Search for the name of your existing custom item in our <a href="https://havoc-wow.com/armory">armory</a> and look at the link. If the link is "https://havoc-wow.com/item/1/156105" 156105 is the number to put into this field. After typing in the id click the blue button to confirm the id and make the stats be changeable.</p>
 					</div>
 				</div>
 			</div>

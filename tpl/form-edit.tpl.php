@@ -29,7 +29,8 @@ require_once('dbconfig.inc.php');
 								<div class="input-group input-group-sm">
 									<div class="input-group-prepend">
 										<span class="input-group-text">Custom Item ID&nbsp;<a target="_blank" href="https://havoc-wow.com/armory">(armory)</a></span>
-										<button type="button" class="btn btn-primary btn-sm" id="onLoadCustom">&#8635;</button>
+										<button class="btn btn-info" type="button" data-toggle="modal" data-target="#customIdModal">?</button>
+										<button type="button" class="btn btn-primary btn-sm" id="onLoadCustom">&#10003; Confirm ID</button>
 									</div>
 									<input class="form-control" type="number" name="custom-id" id="custom-id" placeholder="Custom Item ID" required>
 									<input type="hidden" value="0" name="handed-token" id="handed">
