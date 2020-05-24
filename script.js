@@ -1,3 +1,37 @@
+function checkChangeableTypes (){
+	var classType = $("[name=class-token]").val();
+	var subclass = $("[name=subclass-token]").val();
+	var inventoryType = Number($("[name=inventory-type-token]").val());
+	if ([1, 3, 5, 6, 7, 8, 9, 10].includes(inventoryType)) {
+		//armor
+		$("#item-type > option:not(.armor)").hide();
+		$("#item-type > option.armor").show();
+	} else if ([4, 19].includes(inventoryType)) {
+		//clothing
+		$("#item-type > option:not(.clothing)").hide();
+		$("#item-type > option.clothing").show();
+	} else if ([2, 11, 12, 16].includes(inventoryType)) {
+		//jewellery
+		$("#item-type > option:not(.jewellery)").hide();
+		$("#item-type > option.jewellery").show();
+	} else if (inventoryType == 28) {
+		//relic
+		$("#item-type > option:not(.relic)").hide();
+		$("#item-type > option.relic").show();
+	} else if ([15, 25, 26].includes(inventoryType)) {
+		//range
+		$("#item-type > option:not(.range)").hide();
+		$("#item-type > option.range").show();
+	} else if ([13, 17].includes(inventoryType)) {
+		//melee
+		$("#item-type > option:not(.melee)").hide();
+		$("#item-type > option.melee").show();
+	} else {
+		//everything else
+		$("#item-type > option").hide();
+	}
+}
+
 var error;
 
 function errorOnForm (id) {
@@ -81,8 +115,11 @@ function nullStats () {
 		$("#" + id).val('0');
 	});
 	enab('accountbound-checkbox');
+	enab('item-type');
 	resetAbCheckbox();
+	resetItemTypeSelect();
 	resetKeepCheckbox();
+	resetStatCount();
 	nullTokens();
 	nullCosts();
 }
@@ -92,8 +129,11 @@ function noStats() {
 		$("#" + id).val('');
 	});
 	disab('accountbound-checkbox');
+	disab('item-type');
 	resetAbCheckbox();
+	resetItemTypeSelect();
 	resetKeepCheckbox();
+	resetStatCount();
 	nullTokens();
 	nullCosts();
 }
@@ -101,6 +141,17 @@ function noStats() {
 function resetAbCheckbox() {
 	stat('accountbound', 0);
 	$("#accountbound-checkbox").prop('checked', false);	
+}
+
+function resetStatCount() {
+	$("#costs > #statsAdded").text(0);
+	statsAdded = [];
+}
+
+function resetItemTypeSelect() {
+	stat('class', 0);
+	stat('subclass', 0);
+	  $("#item-type option[value='']").attr('selected', true);
 }
 
 function resetKeepCheckbox() {
@@ -453,4 +504,6 @@ function checkForErrorField (data) {
 			errorOnForm("description-color");
 	} else 
 		errorOnFormReset();
+		if ($("#ajaxContainer").text() != '')
+			nullTokens();
 }
