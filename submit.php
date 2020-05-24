@@ -505,6 +505,7 @@ for (;$c<=10;$c++) {
 	$custom['stat_type'.$c] = 0;
 	$custom['stat_value'.$c] = 0;
 }
+$custom['comment'] = 'CUSTOM (Item Creator)';
 if (isset($name))
 	$custom['name'] = $nameColor.$name;
 if (isset($displayId))
@@ -521,9 +522,9 @@ if (!isset($_GET['page'])) {
 		
 	$characterName = $character->select('characters', ['guid' => $characterId], 1, 'name')['name'];
 } else {
-	$whitelist = ['entry', 'name', 'class', 'subclass', 'InventoryType', 'displayid', 'Quality', 'Flags', 'stat_type1', 'stat_value1', 'stat_type2', 'stat_value2', 'stat_type3', 'stat_value3', 'stat_type4', 'stat_value4', 'stat_type5', 'stat_value5', 'stat_type6', 'stat_value6', 'stat_type7', 'stat_value7', 'stat_type8', 'stat_value8', 'stat_type9', 'stat_value9', 'stat_type10', 'stat_value10', 'dmg_min1', 'dmg_max1', 'armor', 'holy_res', 'fire_res', 'frost_res', 'nature_res', 'shadow_res', 'arcane_res', 'description', 'delay', 'socketColor_1', 'socketColor_2', 'socketColor_3'];
+	$whitelist = ['entry', 'name', 'comment', 'class', 'subclass', 'InventoryType', 'displayid', 'Quality', 'Flags', 'stat_type1', 'stat_value1', 'stat_type2', 'stat_value2', 'stat_type3', 'stat_value3', 'stat_type4', 'stat_value4', 'stat_type5', 'stat_value5', 'stat_type6', 'stat_value6', 'stat_type7', 'stat_value7', 'stat_type8', 'stat_value8', 'stat_type9', 'stat_value9', 'stat_type10', 'stat_value10', 'dmg_min1', 'dmg_max1', 'armor', 'holy_res', 'fire_res', 'frost_res', 'nature_res', 'shadow_res', 'arcane_res', 'description', 'delay', 'socketColor_1', 'socketColor_2', 'socketColor_3'];
 	ArrayHelper::clearArray($custom, $whitelist);
-	$query = "UPDATE item_template SET name = :name, class = :class, subclass = :subclass, InventoryType = :InventoryType, displayid = :displayid, Quality = :Quality, Flags = :Flags, stat_type1 = :stat_type1, stat_value1 = :stat_value1, stat_type2 = :stat_type2, stat_value2 = :stat_value2, stat_type3 = :stat_type3, stat_value3 = :stat_value3, stat_type4 = :stat_type4, stat_value4 = :stat_value4, stat_type5 = :stat_type5, stat_value5 = :stat_value5, stat_type6 = :stat_type6, stat_value6 = :stat_value6, stat_type7 = :stat_type7, stat_value7 = :stat_value7, stat_type8 = :stat_type8, stat_value8 = :stat_value8, stat_type9 = :stat_type9, stat_value9 = :stat_value9, stat_type10 = :stat_type10, stat_value10 = :stat_value10, dmg_min1 = :dmg_min1, dmg_max1 = :dmg_max1, armor = :armor, holy_res = :holy_res, shadow_res = :shadow_res, arcane_res = :arcane_res, nature_res = :nature_res, fire_res = :fire_res, frost_res = :frost_res, delay = :delay, description = :description, socketColor_1 = :socketColor_1, socketColor_2 = :socketColor_2, socketColor_3 = :socketColor_3 WHERE entry = :entry";
+	$query = "UPDATE item_template SET name = :name, comment = :comment, class = :class, subclass = :subclass, InventoryType = :InventoryType, displayid = :displayid, Quality = :Quality, Flags = :Flags, stat_type1 = :stat_type1, stat_value1 = :stat_value1, stat_type2 = :stat_type2, stat_value2 = :stat_value2, stat_type3 = :stat_type3, stat_value3 = :stat_value3, stat_type4 = :stat_type4, stat_value4 = :stat_value4, stat_type5 = :stat_type5, stat_value5 = :stat_value5, stat_type6 = :stat_type6, stat_value6 = :stat_value6, stat_type7 = :stat_type7, stat_value7 = :stat_value7, stat_type8 = :stat_type8, stat_value8 = :stat_value8, stat_type9 = :stat_type9, stat_value9 = :stat_value9, stat_type10 = :stat_type10, stat_value10 = :stat_value10, dmg_min1 = :dmg_min1, dmg_max1 = :dmg_max1, armor = :armor, holy_res = :holy_res, shadow_res = :shadow_res, arcane_res = :arcane_res, nature_res = :nature_res, fire_res = :fire_res, frost_res = :frost_res, delay = :delay, description = :description, socketColor_1 = :socketColor_1, socketColor_2 = :socketColor_2, socketColor_3 = :socketColor_3 WHERE entry = :entry";
 }
 
 $statement = $world->c()->prepare($query);
