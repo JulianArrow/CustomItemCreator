@@ -56,6 +56,9 @@ $(document).ready(function() {
 					echo '$("[name=handed-token]").val(2);';
 				else
 					echo '$("[name=handed-token]").val(0);';
+				echo '$("[name=class-token]").val('.$cItem['class'].');
+					$("[name=subclass-token]").val('.$cItem['subclass'].');
+					$("[name=inventory-type-token]").val('.$cItem['InventoryType'].');';
 			}
 			echo 'break;';
 		}
@@ -69,6 +72,7 @@ $(document).ready(function() {
 			}
 		}
 		checkSubmitButton();
+		checkChangeableTypes();
 	});
 	<?php
 	} elseif (isset($_GET['page']) && $_GET['page'] == 'edit') {
@@ -90,6 +94,7 @@ $(document).ready(function() {
 			   url: url,
 			   data: form.serialize(),
 			   beforeSend: function () {
+				   $("html, body").animate({ scrollTop: 0 }, "fast");
 				   $("#ajaxContainer").html("<br><div class=\"spinner-border mx-auto text-light\" style=\"display: block;\" role=\"status\"><span class=\"sr-only\">Loading...</span></div>");
 			   },
 			   success: function(data)

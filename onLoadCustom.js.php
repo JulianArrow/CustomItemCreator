@@ -66,10 +66,14 @@ function onLoadCustomFunction () {
 			echo '$("[name=handed-token]").val(2);';
 		else
 			echo '$("[name=handed-token]").val(0);';
+		echo '$("[name=class-token]").val('.$result['class'].');
+			$("[name=subclass-token]").val('.$result['subclass'].');
+			$("[name=inventory-type-token]").val('.$result['InventoryType'].');';
 		
 		if ($result['Quality'] == 7)
 			echo '$("#accountbound-checkbox").prop(\'checked\', true); $("#accountbound-checkbox").prop(\'disabled\', true);';
 	?>
+	checkChangeableTypes();
 	enabStats();
 	if ($("[name=handed-token]").val() == 0) {
 		$("#weapon").css('display', 'none');

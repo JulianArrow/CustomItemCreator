@@ -42,7 +42,8 @@ body {
 		right: 64px;
 		font-size: 110%;
 		bottom: 32px;
-		border: 1px solid #222;
+		border: 1px solid #222;    
+		z-index: 10;
 	}
 
 	[name=submitButton] {

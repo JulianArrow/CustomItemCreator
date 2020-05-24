@@ -24,8 +24,9 @@ In order to have a smooth experience please follow the guidelines below.<br>
 <br>
 <span style="font-size: 24px; font-weight:bold;">Other notes:</span><br>
 <ul>
+	<li>Clear your browser cache before complaining about bugs.</li>
 	<li>Maximum 10 stats.</li>
 	<li>You can only edit your custom items.</li>
 	<li>ALWAYS carry your custom item in your backpack or equipped.</li>
-	<li>This page will be updated daily in order to achieve the product you and we all want. </li>
+	<li>This page will be updated daily in order to achieve the product you and we all want.</li>
 </ul> 
