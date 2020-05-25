@@ -127,6 +127,11 @@ if (!isset($_GET['page']) && isset($_POST['keep-item-token']) && TypeUtil::check
 	$keepItemBool = 0;
 }
 
+#costs-validate
+if ($costs < 1) {
+	die(HTMLUtil::bootstrapAlert('you need to spend at least 1 dp.'));
+}
+
 #dp
 if (!$website->exists('account_data', ['dp' => ['>=', $costs], 'id' => $id]))
 	die(HTMLUtil::bootstrapAlert('not enough dp.'));

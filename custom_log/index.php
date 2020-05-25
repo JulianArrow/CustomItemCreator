@@ -45,7 +45,7 @@ foreach ($results as $result) {
 			  <td>'.$result['name'].'</td>
 			  <td>'.$result['description'].'</td>
 			  <td>'.$result['costs'].'</td>
-			  <td>'.$result['date'].'</td>
+			  <td>'.date('d.m.Y H:i', $result['date']).'</td>
 			  <td>'.$result['receipt'].'</td>
 			</tr>';
 }

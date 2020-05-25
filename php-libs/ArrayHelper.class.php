@@ -8,7 +8,8 @@ class ArrayHelper
 {
 	public static function removeNumericalKeys(&$array)
 	{
-		for ($i = 0;$i <= max(array_flip($array));$i++) {
+		
+		for ($i = 0;$i <= max(array_keys($array));$i++) {
 			if (isset($array[$i]))
 				unset($array[$i]);
 		}

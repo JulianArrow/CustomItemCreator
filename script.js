@@ -5,30 +5,43 @@ function checkChangeableTypes (){
 	if ([1, 3, 5, 6, 7, 8, 9, 10].includes(inventoryType)) {
 		//armor
 		$("#item-type > option:not(.armor)").hide();
+		$("#item-type > option:not(.armor)").prop('disabled', true);
 		$("#item-type > option.armor").show();
+		$("#item-type > option.armor").prop('disabled', false);
 	} else if ([4, 19].includes(inventoryType)) {
 		//clothing
 		$("#item-type > option:not(.clothing)").hide();
+		$("#item-type > option:not(.clothing)").prop('disabled', true);
 		$("#item-type > option.clothing").show();
+		$("#item-type > option.clothing").prop('disabled', false);
 	} else if ([2, 11, 12, 16].includes(inventoryType)) {
 		//jewellery
 		$("#item-type > option:not(.jewellery)").hide();
+		$("#item-type > option:not(.jewellery)").prop('disabled', true);
 		$("#item-type > option.jewellery").show();
+		$("#item-type > option.jewellery").prop('disabled', false);
 	} else if (inventoryType == 28) {
 		//relic
 		$("#item-type > option:not(.relic)").hide();
+		$("#item-type > option:not(.relic)").prop('disabled', true);
 		$("#item-type > option.relic").show();
+		$("#item-type > option.relic").prop('disabled', false);
 	} else if ([15, 25, 26].includes(inventoryType)) {
 		//range
 		$("#item-type > option:not(.range)").hide();
+		$("#item-type > option:not(.range)").prop('disabled', true);
 		$("#item-type > option.range").show();
+		$("#item-type > option.range").prop('disabled', false);
 	} else if ([13, 17].includes(inventoryType)) {
 		//melee
 		$("#item-type > option:not(.melee)").hide();
+		$("#item-type > option:not(.melee)").prop('disabled', true);
 		$("#item-type > option.melee").show();
+		$("#item-type > option.melee").prop('disabled', false);
 	} else {
 		//everything else
 		$("#item-type > option").hide();
+		$("#item-type > option").prop('disabled', true);
 	}
 }
 
@@ -504,6 +517,13 @@ function checkForErrorField (data) {
 			errorOnForm("description-color");
 	} else 
 		errorOnFormReset();
-		if ($("#ajaxContainer").text() != '')
-			nullTokens();
+		if ($("#ajaxContainer").text().search("success") > -1) {
+			if (isCreateForm())
+				$("#tab-content").remove();
+			else {
+				nullTokens();
+				nullCosts();
+				checkSubmitButton();
+			}
+		}
 }
