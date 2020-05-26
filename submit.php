@@ -250,7 +250,7 @@ if (isset($addStats['C']) || isset ($addStats['D'])) {
 		} elseif ($addStats['D'] > 0) {
 			if ($addStats['D'] == 3)
 				$custom['socketColor_3'] = 1;
-			if ($addStats['D'] == 2)
+			if ($addStats['D'] > 1)
 				$custom['socketColor_2'] = 1;
 			$custom['socketColor_1'] = 1;
 		}
