@@ -209,11 +209,10 @@ if (isset($addStats['C']) || isset ($addStats['D'])) {
 	if (((int)$addStats['C'] + (int)$addStats['D'] + $gemCount) > 3)
 		die(HTMLUtil::bootstrapAlert('only 3 sockets allowed'));
 	if ($gemCount == 2) {
-		if ($addStats['C'] > 0) {
+		if ($addStats['C'] > 0)
 			$custom['socketColor_3'] = 2;
-		} else {
+		else 
 			$custom['socketColor_3'] = 1;
-		}
 	} elseif ($gemCount == 1) {
 		if ($addStats['C'] > 0) {
 			if ($addStats['C'] == 2) {
@@ -238,8 +237,7 @@ if (isset($addStats['C']) || isset ($addStats['D'])) {
 			} elseif ($addStats['C'] == 2) {
 				$custom['socketColor_3'] = 2;
 				$custom['socketColor_2'] = 2;
-				if ($addStats['D'] > 0)
-					$custom['socketColor_1'] = 1;
+				$custom['socketColor_1'] = 1;
 			} else {
 				if ($addStats['D'] == 2)
 					$custom['socketColor_3'] = 1;
