@@ -65,11 +65,15 @@ $(document).ready(function() {
 		?>
 		}
 		if ($(this).val() != 'none') {
-			if ($("[name=handed-token]").val() == 0) {
-				$("#weapon").css('display', 'none');
-			} else {
-				$("#weapon").css('display', 'block');
-			}
+			if ($("[name=handed-token]").val() == 0) 
+				$("#weapon").hide();
+			else
+				$("#weapon").show();
+	
+			if (![1, 3, 5, 6, 7, 8, 9, 10].includes(Number($("[name=inventory-type-token]").val())))
+				$("#cloth-control").hide();
+			else
+				$("#cloth-control").show();
 		}
 		checkSubmitButton();
 		checkChangeableTypes();
@@ -77,7 +81,7 @@ $(document).ready(function() {
 	<?php
 	} elseif (isset($_GET['page']) && $_GET['page'] == 'edit') {
 	?>
-	nullStats();
+	noStats();
 	<?php
 	}
 	?>

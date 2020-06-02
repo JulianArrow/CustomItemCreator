@@ -148,6 +148,24 @@ $cItems = json_decode($cItem_json, true);
 				</div>
 			</div>
 		</div>
+		<div class="card text-white bg-dark">
+			<div class="card-header" id="headingFour">
+				<h5 class="mb-0">
+					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+					Step 4: Extended options (optional)
+					</button>
+				</h5>
+			</div>
+			<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionContent">
+				<div class="card-body container">
+					<div class="row">
+						<?php
+						require_once('tpl/step-four.tpl.php');
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<input type="submit" value="Create" class="btn btn-dark" id="submitButton" name="submitButton" disabled>
 	

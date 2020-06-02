@@ -107,11 +107,12 @@ require_once('dbconfig.inc.php');
 				</div>
 			</div>
 		</div>
+
 		<div class="card text-white bg-dark">
 			<div class="card-header" id="headingTwo">
 				<h5 class="mb-0">
 					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-					Step 2: Add primary and common secondary stats
+					Step 2: Add primary and common secondary stats (optional)
 					</button>
 				</h5>
 			</div>
@@ -129,7 +130,7 @@ require_once('dbconfig.inc.php');
 			<div class="card-header" id="headingThree">
 				<h5 class="mb-0">
 					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-					Step 3: Add other stats or make the item accountbound
+					Step 3: Add other stats and make the item accountbound (optional)
 					</button>
 				</h5>
 			</div>
@@ -138,6 +139,24 @@ require_once('dbconfig.inc.php');
 					<div class="row">
 						<?php
 						require_once('tpl/step-three.tpl.php');
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card text-white bg-dark">
+			<div class="card-header" id="headingFour">
+				<h5 class="mb-0">
+					<button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+					Step 4: Extended options (optional)
+					</button>
+				</h5>
+			</div>
+			<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionContent">
+				<div class="card-body container">
+					<div class="row">
+						<?php
+						require_once('tpl/step-four.tpl.php');
 						?>
 					</div>
 				</div>

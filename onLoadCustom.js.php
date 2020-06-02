@@ -31,23 +31,19 @@ $result['stats']['weapon-spe'] = $result['delay']/1000;
 
 $gemCount = 0;
 $metaCount = 0;
-if ($result['socketColor_3'] != 0) {
+if ($result['socketColor_3'] != 0)
 	$gemCount = 3;
-} elseif ($result['socketColor_2'] != 0) {
+elseif ($result['socketColor_2'] != 0)
 	$gemCount = 2;
-} elseif ($result['socketColor_1'] != 0) {
+elseif ($result['socketColor_1'] != 0)
 	$gemCount = 1;
-}
 
-if ($result['socketColor_3'] == 1) {
+if ($result['socketColor_3'] == 1)
 	$metaCount++;
-}
-if ($result['socketColor_2'] == 1) {
+if ($result['socketColor_2'] == 1)
 	$metaCount++;
-}
-if ($result['socketColor_1'] == 1) {
+if ($result['socketColor_1'] == 1)
 	$metaCount++;
-}
 
 $result['stats']['reg-gem'] = $gemCount - $metaCount;
 $result['stats']['meta-gem'] = $metaCount;
@@ -70,15 +66,24 @@ function onLoadCustomFunction () {
 			$("[name=subclass-token]").val('.$result['subclass'].');
 			$("[name=inventory-type-token]").val('.$result['InventoryType'].');';
 		
+		if ($result['AllowableClass'] == -1 && $result['class'] == 4 && $result['subclass'] == 1)
+			echo '$("#cloth-checkbox").prop(\'checked\', true); $("#cloth-checkbox").prop(\'disabled\', true);';
+		
 		if ($result['Quality'] == 7)
 			echo '$("#accountbound-checkbox").prop(\'checked\', true); $("#accountbound-checkbox").prop(\'disabled\', true);';
 	?>
 	checkChangeableTypes();
 	enabStats();
-	if ($("[name=handed-token]").val() == 0) {
-		$("#weapon").css('display', 'none');
-	} else {
-		$("#weapon").css('display', 'block');;
-	}
+	if ($("[name=handed-token]").val() == 0) 
+		$("#weapon").hide();
+	else
+		$("#weapon").show();
+	
+	if (![1, 3, 5, 6, 7, 8, 9, 10].includes(Number($("[name=inventory-type-token]").val())))
+		$("#cloth-control").hide();
+	else
+		$("#cloth-control").show();
+		
+		
 	checkSubmitButton();
 }

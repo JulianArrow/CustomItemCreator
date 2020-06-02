@@ -128,8 +128,10 @@ function nullStats () {
 		$("#" + id).val('0');
 	});
 	enab('accountbound-checkbox');
+	enab('cloth-checkbox');
 	enab('item-type');
 	resetAbCheckbox();
+	resetCCheckbox();
 	resetItemTypeSelect();
 	resetKeepCheckbox();
 	resetStatCount();
@@ -142,8 +144,10 @@ function noStats() {
 		$("#" + id).val('');
 	});
 	disab('accountbound-checkbox');
+	disab('cloth-checkbox');
 	disab('item-type');
 	resetAbCheckbox();
+	resetCCheckbox();
 	resetItemTypeSelect();
 	resetKeepCheckbox();
 	resetStatCount();
@@ -154,6 +158,11 @@ function noStats() {
 function resetAbCheckbox() {
 	stat('accountbound', 0);
 	$("#accountbound-checkbox").prop('checked', false);	
+}
+
+function resetCCheckbox() {
+	stat('cloth', 0);
+	$("#cloth-checkbox").prop('checked', false);
 }
 
 function resetStatCount() {
@@ -445,6 +454,17 @@ function registerAbCheckbox () {
 		checkSubmitButton();
 	});
 }
+
+function registerCCheckbox () {
+	$("#cloth-checkbox").change(function () {
+		if ($(this).prop('checked') == true) {
+			incrToken('accountbound');
+		} else {
+			decrToken('accountbound');
+		}
+	});
+}
+
 function registerKICheckbox () {
 	$("#keep-item-checkbox").change(function () {
 		amount = $(".custom-control:has(#keep-item-checkbox) > .custom-control-label > small > .prize").text();
@@ -484,6 +504,7 @@ function register () {
 		registerButtons();
 		registerDescrCheckbox();
 		registerAbCheckbox();
+		registerCCheckbox();
 		registerKICheckbox();
 		registerRequiredFields();
 	} else {
@@ -492,6 +513,7 @@ function register () {
 		registerDisplayIdCheckbox();
 		registerRequiredFields();
 		registerAbCheckbox();
+		registerCCheckbox();
 		registerButtons();
 		registerOnLoadCustom();
 	}
