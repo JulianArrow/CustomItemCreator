@@ -184,10 +184,10 @@ if (isset($addStats['A'])) {
 if (isset($addStats['B'])) {
 	$custom['delay'] = (int)$custom['delay'] + floatval($addStats['B'])*1000;
 	if ($custom['InventoryType'] == 13)
-		if ($custom['delay'] > weaponSpeedCap)
+		if ($custom['delay'] > weaponSpeedCap*1000)
 			die(HTMLUtil::bootstrapAlert('weapon-speed must not be over '.weaponSpeedCap));
 	elseif ($custom['InventoryType'] == 17)
-		if ($custom['delay'] > weaponSpeed2hCap)
+		if ($custom['delay'] > weaponSpeed2hCap*1000)
 			die(HTMLUtil::bootstrapAlert('weapon-speed must not be over '.weaponSpeed2hCap));
 	else 
 		$custom['delay'] = 0;

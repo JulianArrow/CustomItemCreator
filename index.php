@@ -128,7 +128,7 @@ new TemplateHelper('/tpl', '.tpl.php', str_replace('\\', '/', __DIR__));
 						echo 'https://havoc-wow.com/login">You need to log in'; 
 					} else {
 						$result = $website->select('account_data', ['id' => $_SESSION['']['id']], 1, 'dp');
-						echo 'https://havoc-wow.com/ucp">You\'re logged in (DP: '.$result['dp'].')';
+						echo 'https://havoc-wow.com/ucp">You\'re logged in (DP: <span id="dp">'.$result['dp'].'</span>)';
 					}
 					?></a>
 				</li>

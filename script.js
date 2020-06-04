@@ -198,7 +198,7 @@ function buy (id) {
 	incr(id, amount);
 	incrToken(id);
 	incrCosts(costs);
-	if (id == "weapon-spe" && $("[name=weapon-spe-token]").val() < 0)
+	if (id == "weapon-spe" && $("[name=weapon-spe-token]").val() < 1)
 		decrCosts(2*costs);
 	checkSubmitButton();
 	if (!checkCaps()) {
