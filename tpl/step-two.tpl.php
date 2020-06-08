@@ -1,4 +1,4 @@
-<div class="col-sm">
+<div class="col-lg">
 	<div class="form-group" id="primary-stats">
 		<!-- Stamina -->
 		<div class="input-group">
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-sm">
+<div class="col-lg">
 	<div class="form-group" id="secondary-stats">
 		<!-- Haste -->
 		<div class="input-group">

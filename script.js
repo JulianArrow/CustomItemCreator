@@ -1,3 +1,163 @@
+var statsAdded = [];
+var dontCountAsStats = ['meta-gem', 'reg-gem', 'weapon-dmg', 'weapon-spe', 'armor', 'magic-res'];
+
+function checkMergeableStats () {
+	if(statsAdded.length > 0) {
+		$(".merge-group select:not(.mergeSelectB)").prop('disabled', false);
+		$(".merge-group option").hide();
+		var i;
+		for (i = 0; i < statsAdded.length; i++) {
+			$(".merge-group option[value=" + statsAdded[i] + "]").show();
+		$(".merge-group option[value='']").show();
+		$(".merge-group option[value='']").prop('selected', true);
+		$(".merge-group .statInput").prop('disabled', true);
+		$(".merge-group .statOutput").fadeOut();
+		$(".merge-group .statInput, .merge-group .statOutput").val(10);
+		}
+	} else {
+		$(".merge-group option[value='']").prop('selected', true);
+		$(".merge-group select").prop('disabled', true);
+		$(".merge-group .statInput").prop('disabled', true);
+		$(".merge-group .statOutput").fadeOut();
+		$(".merge-group .statInput, .merge-group .statOutput").val(10);
+		resetStatsMerge();
+	}
+}
+
+function checkMergeableStatsRe (ele) {
+	var number = ele.parent().parent().parent().attr('data-number');
+	var value = ele.val();
+	if (value != '')
+		$(".merge-group:not([data-number=" + number + "]) .mergeSelect option[value=" + value + "]").hide();
+}
+
+function checkSlider (ele) {
+	var number = ele.parent().parent().parent().attr('data-number');
+	var value = ele.val();
+	
+	if (value != '') {
+		$(".merge-group[data-number=" + number + "] .statInput").prop('disabled', false);
+		$(".merge-group[data-number=" + number + "] .statInput").attr('max', Number($("#" + value).val()));
+		$(".merge-group[data-number=" + number + "] .statOutput").fadeIn();
+	} else {
+		$(".merge-group[data-number=" + number + "] .statInput").prop('disabled', true);
+		$(".merge-group[data-number=" + number + "] .statInput").val(0);
+		$(".merge-group[data-number=" + number + "] .statOutput").fadeOut();
+	}
+}
+
+function checkMergeableStatsB (ele) {
+	var number = ele.parent().parent().parent().attr('data-number');
+	var value = ele.val();
+	
+	if (value != '') {
+		$(".merge-group[data-number=" + number + "] .mergeSelectB").prop('disabled', false);
+		var group = ele.find("option:selected").attr('class');
+		$(".merge-group[data-number=" + number + "] .mergeSelectB option").hide();
+		$(".merge-group[data-number=" + number + "] .mergeSelectB option[class=" + group + "]:not([value=" + value + "])").show();
+		$(".merge-group[data-number=" + number + "] .mergeSelectB option[value='']").show();
+	} else {
+		$(".merge-group[data-number=" + number + "] .mergeSelectB option[value='']").prop('selected', true);
+		$(".merge-group[data-number=" + number + "] .mergeSelectB").prop('disabled', true);
+	}
+	
+	
+}
+
+var statsMergeCount = 1;
+
+function updateStatsMergeCount () {
+	$("#merge-count").val(statsMergeCount);
+}
+
+function addStatsMerge() {
+	if (statsAdded < 1) {
+		alert('choose your item before merging');
+		return;
+	}
+	if (statsMergeCount + 1 > 10) {
+		alert('you can\'t merge more than 10 at a time');
+		return;
+	}
+	$(".merge-group .mergeSelectB").prop('disabled', true);
+	if (statsMergeCount == 1)
+		$("#removeStat").fadeIn();
+	statsMergeCount++;
+	updateStatsMergeCount();
+	$('<div class="form-group merge-group" data-number="' + statsMergeCount + '">'
+	+			'<div class="row">'
+	+				'<div class="col-sm">'
+	+					'<select class="custom-select custom-select-sm mergeSelect" name="mergeSelect' + statsMergeCount + '" disabled>'
+	+						'<option value="" selected>Select a stat...</option>'
+	+						'<option value="stamina" class="mainStat">Stamina</option>'
+	+						'<option value="strength" class="mainStat">Strength</option>'
+	+						'<option value="intellect" class="mainStat">Intellect</option>'
+	+						'<option value="agility" class="mainStat">Agility</option>'
+	+						'<option value="spirit" class="mainStat">Spirit</option>'
+	+						'<option value="haste" class="secStat">Haste Rating</option>'
+	+						'<option value="parry" class="secStat">Parry Rating</option>'
+	+						'<option value="hit" class="secStat">Hit Rating</option>'
+	+						'<option value="crit" class="secStat">Critical Strike Rating</option>'
+	+						'<option value="dodge" class="secStat">Dodge Rating</option>'
+	+						'<option value="defense" class="secStat">Defense Rating</option>'
+	+						'<option value="block" class="secStat">Block Rating</option>'
+	+						'<option value="armor-pen" class="secStat">Armor Penetration</option>'
+	+						'<option value="spell-pen" class="secStat">Spell Penetration</option>'
+	+						'<option value="resilience" class="secStat">Resilience</option>'
+	+						'<option value="attack-power" class="mainStat">Attack Power</option>'
+	+						'<option value="spell-power" class="mainStat">Spell Power</option>'
+	+						'<option value="expertise" class="secStat">Expertise</option>'
+	+					'</select>'
+	+				'</div>'
+	+				'<div class="col-sm range-col">'
+	+					'<input type="range" class="statInput" name="statInput' + statsMergeCount + '" id="statInput' + statsMergeCount + '" value="10" step="10" min="10" max="1000" oninput="statOutput' + statsMergeCount + '.value = statInput' + statsMergeCount + '.value" disabled>'
+	+					'<br><output class="statOutput badge badge-primary" id="statOutput' + statsMergeCount + '">10</output>'
+	+					' <span class="badge badge-info">&nbsp;&#11208;&nbsp;</span>'
+	+				'</div>'
+	+				'<div class="col-sm">'
+	+					'<select class="custom-select custom-select-sm mergeSelectB" name="mergeSelectB' + statsMergeCount + '" disabled>'
+	+						'<option value="" selected>Select a stat...</option>'
+	+						'<option value="stamina" class="mainStat">Stamina</option>'
+	+						'<option value="strength" class="mainStat">Strength</option>'
+	+						'<option value="intellect" class="mainStat">Intellect</option>'
+	+						'<option value="agility" class="mainStat">Agility</option>'
+	+						'<option value="spirit" class="mainStat">Spirit</option>'
+	+						'<option value="haste" class="secStat">Haste Rating</option>'
+	+						'<option value="parry" class="secStat">Parry Rating</option>'
+	+						'<option value="hit" class="secStat">Hit Rating</option>'
+	+						'<option value="crit" class="secStat">Critical Strike Rating</option>'
+	+						'<option value="dodge" class="secStat">Dodge Rating</option>'
+	+						'<option value="defense" class="secStat">Defense Rating</option>'
+	+						'<option value="block" class="secStat">Block Rating</option>'
+	+						'<option value="armor-pen" class="secStat">Armor Penetration</option>'
+	+						'<option value="spell-pen" class="secStat">Spell Penetration</option>'
+	+						'<option value="resilience" class="secStat">Resilience</option>'
+	+						'<option value="attack-power" class="mainStat">Attack Power</option>'
+	+						'<option value="spell-power" class="mainStat">Spell Power</option>'
+	+						'<option value="expertise" class="secStat">Expertise</option>'
+	+					'</select>'
+	+				'</div>'
+	+			'</div>'
+	+		'<hr>'
+	+		'</div>').insertBefore("#mergeStatCountButtons").fadeIn();
+	
+	checkMergeableStats();
+	registerMergeSelect();
+}
+function removeStatsMerge() {
+	$(".merge-group[data-number=" + statsMergeCount + "]").fadeOut(300, function() { $(this).remove(); });
+	statsMergeCount--;
+	updateStatsMergeCount();
+	if (statsMergeCount == 1)
+		$("#removeStat").fadeOut();
+}
+function resetStatsMerge () {
+	var i;
+	for (i = statsMergeCount; i > 1; i--) {
+		removeStatsMerge();
+	}
+}
+
 function checkChangeableTypes (){
 	var classType = $("[name=class-token]").val();
 	var subclass = $("[name=subclass-token]").val();
@@ -57,10 +217,8 @@ function errorOnFormReset () {
 	error = null;
 }
 
-var statsAdded = [];
-var dontCountAsStats = ['meta-gem', 'reg-gem', 'weapon-dmg', 'weapon-spe', 'armor', 'magic-res'];
-
 function checkStatsAdded () {
+	checkMergeableStats();
 	$("#costs > #statsAdded").text(statsAdded.length);
 }
 
@@ -173,7 +331,7 @@ function resetStatCount() {
 function resetItemTypeSelect() {
 	stat('class', 0);
 	stat('subclass', 0);
-	  $("#item-type option[value='']").attr('selected', true);
+	$("#item-type option[value='']").prop('selected', true);
 }
 
 function resetKeepCheckbox() {
@@ -486,35 +644,46 @@ function registerRequiredFields () {
 		$("[name=display-id]").on('input',function () {
 			checkSubmitButton();
 		});
-		$("[name=character-id]").on('input',function () {
-			checkSubmitButton();
-		});
 	} else {
-		$("[name=character-id]").on('input',function () {
-			checkSubmitButton();
-		});
 		$("[name=custom-id]").on('input',function () {
 			checkSubmitButton();
 		});
 	}
+	$("[name=character-id]").on('input',function () {
+		checkSubmitButton();
+	});
+}
+
+function registerMergeButtons () {
+	$("#addStat").click(function () {
+		addStatsMerge();
+	});
+	$("#removeStat").click(function () {
+		removeStatsMerge();
+	});
+}
+
+function registerMergeSelect () {
+	$(".mergeSelect").change(function () {
+		checkMergeableStatsRe( $(this) );
+		checkMergeableStatsB( $(this) );
+		checkSlider( $(this) );
+	});
 }
 
 function register () {
+	registerMergeSelect();
+	registerMergeButtons();
+	registerButtons();
+	registerDescrCheckbox();
+	registerAbCheckbox();
+	registerCCheckbox();
+	registerRequiredFields();
 	if (isCreateForm()) {
-		registerButtons();
-		registerDescrCheckbox();
-		registerAbCheckbox();
-		registerCCheckbox();
 		registerKICheckbox();
-		registerRequiredFields();
 	} else {
-		registerDescrCheckbox();
 		registerNameCheckbox();
 		registerDisplayIdCheckbox();
-		registerRequiredFields();
-		registerAbCheckbox();
-		registerCCheckbox();
-		registerButtons();
 		registerOnLoadCustom();
 	}
 }

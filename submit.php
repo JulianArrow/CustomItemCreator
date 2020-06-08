@@ -482,6 +482,68 @@ if (isset($_POST['item-type']) && $_POST['item-type'] != '') {
 	}
 }
 
+#mergeStats
+$mergeStatsCount = (int) $_POST['merge-token'];
+$mainStats = ['stamina', 'strength', 'intellect', 'agility', 'spirit', 'attack-power', 'spell-power'];
+$secStats = ['haste', 'parry', 'hit', 'crit', 'dodge', 'defense', 'block', 'armor-pen', 'spell-pen', 'resilience', 'attack-power', 'spell-power', 'expertise'];
+$stayMergeStats = [];
+
+for ($i=1;$i<=$mergeStatsCount;$i++) {
+	if (isset($_POST['mergeSelect'.$i]) && !empty($_POST['mergeSelect'.$i]) && isset($_POST['mergeSelectB'.$i]) && !empty($_POST['mergeSelectB'.$i]) && isset($_POST['statInput'.$i]) && (int)$_POST['statInput'.$i] > 0) {
+		if (in_array($_POST['mergeSelect'.$i], $mainStats)) {
+			if (!in_array($_POST['mergeSelectB'.$i], $mainStats))
+				die(HTMLUtil::bootstrapAlert('Two stats you selected are not compatible'));
+			
+			foreach(stats as $key => $stat) {
+				$amount = $stat['amount'];
+				$prize = $stat['prize'];
+				if ($stat['type'] == $_POST['mergeSelect'.$i]) {
+					foreach(stats as $keyB => $statB) {
+						$amountB = $statB['amount'];
+						$prizeB = $statB['prize'];
+						if ($statB['type'] == $_POST['mergeSelectB'.$i]) {
+							$newAmount = floor((int)$_POST['statInput'.$i]*($amountB/$amount)*($prize/$prizeB));
+							if (!isset($addStats[$key]))
+								$addStats[$key] = 0;
+							$addStats[$key] -= (int)$_POST['statInput'.$i];
+							if (!isset($addStats[$keyB]))
+								$addStats[$keyB] = 0;
+							$addStats[$keyB] += $newAmount;
+							$stayMergeStats[$keyB] = $newAmount;
+						}
+					}
+				}
+			}
+		} elseif (in_array($_POST['mergeSelect'.$i], $secStats)) {
+			if (!in_array($_POST['mergeSelectB'.$i], $secStats))
+				die(HTMLUtil::bootstrapAlert('Two stats you selected are not compatible'));
+			
+			foreach(stats as $key => $stat) {
+				$amount = $stat['amount'];
+				$prize = $stat['prize'];
+				if ($stat['type'] == $_POST['mergeSelect'.$i]) {
+					foreach(stats as $keyB => $statB) {
+						$amountB = $statB['amount'];
+						$prizeB = $statB['prize'];
+						if ($statB['type'] == $_POST['mergeSelectB'.$i]) {
+							$newAmount = floor((int)$_POST['statInput'.$i]*($amountB/$amount)*($prize/$prizeB));
+							if (!isset($addStats[$key]))
+								$addStats[$key] = 0;
+							$addStats[$key] -= (int)$_POST['statInput'.$i];
+							if (!isset($addStats[$keyB]))
+								$addStats[$keyB] = 0;
+							$addStats[$keyB] += $newAmount;
+							$stayMergeStats[$keyB] = $newAmount;
+						}
+					}
+				}
+			}
+		} else
+			die(HTMLUtil::bootstrapAlert('A stat you selected is not mergeable'));
+	}
+}
+
+#transferStats
 $dbStatTypes = [];
 for ($i=1;$i<=10;$i++) {
 	if (!isset($dbStatTypes[$custom['stat_type'.$i]]))
@@ -492,6 +554,24 @@ for ($i=1;$i<=10;$i++) {
 }
 unset($dbStatTypes[0]);
 $newStats = $dbStatTypes + $addStats;
+
+$c = 1;
+foreach ($newStats as $key => $newStat) {
+	if (array_key_exists($key, $dbStatTypes) && array_key_exists($key, $addStats)) {
+		$newStats[$key] = (int)$newStats[$key] + (int)$addStats[$key];
+	}
+	
+	if ($newStats[$key] == 0) 
+		$statType = 0;
+	elseif ($newStats[$key] > 0)
+		$statType = $key;
+	else
+		die(HTMLUtil::bootstrapAlert('You can\'t go under 0 of a stat'));
+	
+	$custom['stat_type'.$c] = $statType;
+	$custom['stat_value'.$c++] = $newStats[$key];
+}
+
 $newStatsInt = [];
 foreach ($newStats as $key => $newStat) {
 	if (is_numeric($key)) 
@@ -500,14 +580,7 @@ foreach ($newStats as $key => $newStat) {
 if (count($newStatsInt) > 10)
 	die(HTMLUtil::bootstrapAlert('Max 10 different stats allowed'));
 
-$c = 1;
-foreach ($newStats as $key => $newStat) {
-	if (array_key_exists($key, $dbStatTypes) && array_key_exists($key, $addStats)) {
-		$newStats[$key] = (int)$newStats[$key] + (int)$addStats[$key];
-	}
-	$custom['stat_type'.$c] = $key;
-	$custom['stat_value'.$c++] = $newStats[$key];
-}
+
 #checkCaps
 if ((isset($newStats[3]) && $newStats[3] > mainStatCap) || (isset($newStats[4]) && $newStats[4] > mainStatCap) || (isset($newStats[5]) && $newStats[5] > mainStatCap) || (isset($newStats[6]) && $newStats[6] > mainStatCap) || (isset($newStats[7]) && $newStats[7] > mainStatCap)) 
 	die(HTMLUtil::bootstrapAlert('main-stat-cap is '.mainStatCap));
@@ -569,7 +642,8 @@ $website->insert('custom_form_log', [
 	'name' => $custom['name'], 
 	'date' => $time, 
 	'description' => $custom['description'], 
-	'receipt' => print_r($stayAddStats, true)
+	'added' => print_r($stayAddStats, true), 
+	'merged' => print_r($stayMergeStats, true)
 ]);
 if (!isset($_GET['page']))
 	HTMLUtil::bootstrapAlert('Your weapon was probably successfully created! Your custom-item entry is: '.$custom['entry'], 'success');

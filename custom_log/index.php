@@ -31,7 +31,8 @@ td {
 			<th scope="col">Weapon-Description</th>
 			<th scope="col">Costs</th>
 			<th scope="col">Date</th>
-			<th scope="col">Receipt</th>
+			<th scope="col">Added</th>
+			<th scope="col">Merged</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -46,7 +47,8 @@ foreach ($results as $result) {
 			  <td>'.$result['description'].'</td>
 			  <td>'.$result['costs'].'</td>
 			  <td>'.date('d.m.Y H:i', $result['date']).'</td>
-			  <td>'.$result['receipt'].'</td>
+			  <td>'.$result['added'].'</td>
+			  <td>'.$result['merged'].'</td>
 			</tr>';
 }
 ?>

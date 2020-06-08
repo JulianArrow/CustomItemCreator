@@ -6,7 +6,8 @@ CREATE TABLE `custom_form_log` (
 	`costs` SMALLINT(5) NOT NULL,
 	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
 	`description` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
-	`receipt` TEXT NOT NULL COLLATE 'utf8_unicode_ci',
+	`added` TEXT NOT NULL COLLATE 'utf8_unicode_ci',
+	`merged` TEXT NOT NULL COLLATE 'utf8_unicode_ci',
 	`log_id` MEDIUMINT(8) NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`log_id`)
 )

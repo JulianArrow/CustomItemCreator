@@ -34,11 +34,15 @@ button.btn-link, input[type=submit] {
 	font-weight: bolder;
 }
 
-#weapon {
-	display: none;
+.range-col {
+		text-align: center;
 }
 
-#cloth-control {
+.statInput {
+	width: 100%;
+}
+
+#weapon, #cloth-control, #removeStat, .statOutput, .merge-group:not([data-number="1"]) {
 	display: none;
 }
 

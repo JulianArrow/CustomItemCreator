@@ -23,7 +23,7 @@ require_once('dbconfig.inc.php');
 			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionContent">
 				<div class="card-body container">
 					<div class="row">
-						<div class="col-sm">
+						<div class="col-md">
 							<div class="form-group" id="base-information">
 								<!-- Custom Item ID -->
 								<div class="input-group input-group-sm">
@@ -78,7 +78,7 @@ require_once('dbconfig.inc.php');
 								</div>
 							</div>
 						</div>
-						<div class="col-sm">
+						<div class="col-md">
 							<div class="form-group" id="description-group">
 								<!-- Description -->
 								<div class="custom-control custom-checkbox" id="use-description-checkbox">
@@ -154,11 +154,9 @@ require_once('dbconfig.inc.php');
 			</div>
 			<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionContent">
 				<div class="card-body container">
-					<div class="row">
-						<?php
-						require_once('tpl/step-four.tpl.php');
-						?>
-					</div>
+					<?php
+					require_once('tpl/step-four.tpl.php');
+					?>
 				</div>
 			</div>
 		</div>

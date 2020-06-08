@@ -44,6 +44,7 @@ $(document).ready(function() {
 			enabStats();
 			nullStats();
 		}
+		resetStatsMerge();
 		switch ($("[name=item-base]").val()) {
 		<?php
 		foreach ($cItems as $cItem) {
@@ -77,6 +78,7 @@ $(document).ready(function() {
 		}
 		checkSubmitButton();
 		checkChangeableTypes();
+		checkMergeableStats();
 	});
 	<?php
 	} elseif (isset($_GET['page']) && $_GET['page'] == 'edit') {

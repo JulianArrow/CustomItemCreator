@@ -86,4 +86,5 @@ function onLoadCustomFunction () {
 		
 		
 	checkSubmitButton();
+	checkMergeableStats();
 }

@@ -23,7 +23,7 @@ $cItems = json_decode($cItem_json, true);
 			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionContent">
 				<div class="card-body container">
 					<div class="row">
-						<div class="col-sm">
+						<div class="col-md">
 							<div class="form-group" id="base-information">
 								<!-- Item Base -->
 								<div class="input-group input-group-sm">
@@ -83,7 +83,7 @@ $cItems = json_decode($cItem_json, true);
 								</div>
 							</div>
 						</div>
-						<div class="col-sm">
+						<div class="col-md">
 							<div class="form-group" id="description-group">
 								<!-- Description -->
 								<div class="custom-control custom-checkbox" id="use-description-checkbox">
@@ -158,11 +158,9 @@ $cItems = json_decode($cItem_json, true);
 			</div>
 			<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionContent">
 				<div class="card-body container">
-					<div class="row">
-						<?php
-						require_once('tpl/step-four.tpl.php');
-						?>
-					</div>
+					<?php
+					require_once('tpl/step-four.tpl.php');
+					?>
 				</div>
 			</div>
 		</div>

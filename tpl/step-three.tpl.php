@@ -1,4 +1,4 @@
-<div class="col-sm">
+<div class="col-lg">
 	<div class="form-group" id="penetration">
 		<!-- Armor Penetration -->
 		<div class="input-group">
@@ -92,7 +92,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-sm">
+<div class="col-lg">
 	<div class="form-group" id="expertise-stats">
 		<!-- Expertise -->
 		<div class="input-group">
